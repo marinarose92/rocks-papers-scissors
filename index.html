@@ -10,7 +10,6 @@ return computerSelection	;
 }
 
 const computerSelection = computerPlay();
-const playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
 
 let playerScore = 0;
 let computerScore = 0;
@@ -34,18 +33,25 @@ function gameRound(playerSelection, computerSelection) {
 }
 
 function game(){
+	let playerSelection;
 	console.log("Round one.");
+	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
 	gameRound(playerSelection, computerSelection);
 	console.log("Player: " + playerScore + " Computer: " + computerScore);
+	
+	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
 	console.log("Round two.");
 	gameRound(playerSelection, computerSelection);
 	console.log("Player: " + playerScore + " Computer: " + computerScore);
+	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
 	console.log("Round three.");
 	gameRound(playerSelection, computerSelection);
 	console.log("Player: " + playerScore + " Computer: " + computerScore);
+	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
 	console.log("Round four.");
 	gameRound(playerSelection, computerSelection);
 	console.log("Player: " + playerScore + " Computer: " + computerScore);
+	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
 	console.log("Round five.");
 	gameRound(playerSelection, computerSelection);
 	console.log("Player: " + playerScore + " Computer: " + computerScore);
