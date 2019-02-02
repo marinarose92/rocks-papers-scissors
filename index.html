@@ -1,72 +1,134 @@
 <html>
+    <head>
+        <style type="text/css">
+        body {
+            font-family:Tahoma;
+            width:100%;
+            position:relative;
+            background-color:BLACK;
+            color:white;
+        }
+        #container {
+            text-align:center;
+            position: absolute;
+            top:30%;
+            left:50%;
+            transform: translate(-50%, -50%);
+        }
+        button {
+            font-size:36px;
+            width:300px;
+            min-width:200px;
+            height:100px;
+            background-color:lightblue;
+            margin-top:0%;
+            border-radius:10px;
+        }
+        .content {
+            font-size:36px;
+            text-align:center;
+        }
+        
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <h1>Rock, Paper, Scissors</h1>
+            <h4>Click below to play.</h4>
+            <div id="buttonsDiv">
+            <button id="rock">✊</button>
+            <button id="paper">✋</button>
+            <button id="scissors">✌️</button>
+            </div>
+            <div id="result">
+                </div>
+            <div id="score">
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
+            </div>
+        </div>
+    </body>
+    <script>
 
 function computerPlay() {
 let arrayRPS = ["rock", "paper", "scissors"];
-let computerSelection = arrayRPS [Math.floor(Math.random() *   arrayRPS.length)]; 
-return computerSelection	;
+var computerSelection = arrayRPS [Math.floor(Math.random() *   arrayRPS.length)]; 
+return computerSelection;
 }
 
-const computerSelection = computerPlay();
+const container = document.querySelector('#container');
+const content = document.createElement('p');
+content.classList.add('content');
+const button = document.querySelectorAll('button');
+const result = document.querySelector('#result');
+const scoreDiv = document.querySelector('#score')
 
 let playerScore = 0;
 let computerScore = 0;
 
-function gameRound(playerSelection, computerSelection) {
-  if (computerSelection === playerSelection) {
-    return "It's a tie!";
-  } else if (computerSelection === 'paper' && playerSelection.toLowerCase() === 'rock') {
-    computerScore++;
-    return "Paper covers rock. I win.";
-  } else if (computerSelection === 'rock' && playerSelection.toLowerCase() === 'scissors') {
-    computerScore++;
-    return "Rock crushes scissors. I win."
-  } else if (computerSelection === 'scissors' && playerSelection.toLowerCase() === 'paper') {
-    computerScore++;
-    return "Scissors cut paper. I win.";
-  } else {
-    playerScore++;
-    return "You win!";
-}
-}
+const scoreTxt = document.createElement('p');
+scoreTxt.classList.add('score');
 
-function game(){
-	let playerSelection;
-	console.log("Round one.");
-	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
-	gameRound(playerSelection, computerSelection);
-	console.log("Player: " + playerScore + " Computer: " + computerScore);
-	
-	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
-	console.log("Round two.");
-	gameRound(playerSelection, computerSelection);
-	console.log("Player: " + playerScore + " Computer: " + computerScore);
-	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
-	console.log("Round three.");
-	gameRound(playerSelection, computerSelection);
-	console.log("Player: " + playerScore + " Computer: " + computerScore);
-	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
-	console.log("Round four.");
-	gameRound(playerSelection, computerSelection);
-	console.log("Player: " + playerScore + " Computer: " + computerScore);
-	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
-	console.log("Round five.");
-	gameRound(playerSelection, computerSelection);
-	console.log("Player: " + playerScore + " Computer: " + computerScore);
-};
+    button.forEach((button) => {
+        button.addEventListener('click', (e) => {
+            let playerSelection = button.id;
+            const computerSelection = computerPlay();
+            console.log(playerSelection);
+            console.log(computerSelection);
+            function gameRound() {
+                if (computerSelection === playerSelection) {
+                    content.textContent = "It's a tie!";
+                    result.appendChild(content);
+                } else if (computerSelection === 'paper' && playerSelection.toLowerCase() === 'rock') {
+                    computerScore++;
+                    content.textContent = "Paper covers rock. Computer scores.";
+                    result.appendChild(content);
+                } else if (computerSelection === 'rock' && playerSelection.toLowerCase() === 'scissors') {
+                    computerScore++;
+                    content.textContent = "Rock crushes scissors. Computer scores.";
+                    result.appendChild(content);
+                } else if (computerSelection === 'scissors' && playerSelection.toLowerCase() === 'paper') {
+                    computerScore++;
+                    content.textContent = "Scissors cut paper. Computer scores.";
+                    result.appendChild(content);
+                } else if (computerSelection === 'rock' && playerSelection.toLowerCase() === 'paper') {
+                    playerScore++;
+                    content.textContent = "Paper covers rock. You score!";
+                    result.appendChild(content);
+                } else if (computerSelection === 'scissors' && playerSelection.toLowerCase() === 'rock') {
+                    playerScore++;
+                    content.textContent = "Rock crushes scissors. You score!";
+                    result.appendChild(content);
+                } else if (computerSelection === 'paper' && playerSelection.toLowerCase() === 'scissors') {
+                    playerScore++;
+                    content.textContent = "Scissors cut paper. You score!";
+                    result.appendChild(content);
+                } else {
+                    return "ERROR";
+                }
+            }
+            function game (){
+                    gameRound(computerSelection, playerSelection);
+                        function tally () {
+                            if (playerScore === 5) {
+                                scoreTxt.textContent = "You win!";
+                            } else if (computerScore === 5) {
+                                scoreTxt.textContent = "Computer wins!";
+                            } else {
+                            scoreTxt.textContent = "Computer: " + computerScore + " | " + "Player: " + playerScore;
+                            scoreDiv.appendChild(scoreTxt);
+                        }
+                    }
+                    tally();
+                   
+            }
 
-function tally() {
-	if (1 + 1 === 2) {
-		return "Congratulations, you win!";
-} else {
-		return "Sorry, the computer wins!";
-}}
 
-console.log(game());
-console.log(tally());
-});
+            game(computerSelection, playerSelection);
 
-</script>
+            
+        });
+    });
+
+  
+    </script>
 </html>

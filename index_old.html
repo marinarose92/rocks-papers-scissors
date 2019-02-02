@@ -1,0 +1,72 @@
+<html>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+function computerPlay() {
+let arrayRPS = ["rock", "paper", "scissors"];
+let computerSelection = arrayRPS [Math.floor(Math.random() *   arrayRPS.length)]; 
+return computerSelection	;
+}
+
+const computerSelection = computerPlay();
+
+let playerScore = 0;
+let computerScore = 0;
+
+function gameRound(playerSelection, computerSelection) {
+  if (computerSelection === playerSelection) {
+    return "It's a tie!";
+  } else if (computerSelection === 'paper' && playerSelection.toLowerCase() === 'rock') {
+    computerScore++;
+    return "Paper covers rock. I win.";
+  } else if (computerSelection === 'rock' && playerSelection.toLowerCase() === 'scissors') {
+    computerScore++;
+    return "Rock crushes scissors. I win."
+  } else if (computerSelection === 'scissors' && playerSelection.toLowerCase() === 'paper') {
+    computerScore++;
+    return "Scissors cut paper. I win.";
+  } else {
+    playerScore++;
+    return "You win!";
+}
+}
+
+function game(){
+	let playerSelection;
+	console.log("Round one.");
+	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
+	gameRound(playerSelection, computerSelection);
+	console.log("Player: " + playerScore + " Computer: " + computerScore);
+	
+	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
+	console.log("Round two.");
+	gameRound(playerSelection, computerSelection);
+	console.log("Player: " + playerScore + " Computer: " + computerScore);
+	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
+	console.log("Round three.");
+	gameRound(playerSelection, computerSelection);
+	console.log("Player: " + playerScore + " Computer: " + computerScore);
+	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
+	console.log("Round four.");
+	gameRound(playerSelection, computerSelection);
+	console.log("Player: " + playerScore + " Computer: " + computerScore);
+	playerSelection = prompt("Welcome. Please choose rock, paper or scissors.");
+	console.log("Round five.");
+	gameRound(playerSelection, computerSelection);
+	console.log("Player: " + playerScore + " Computer: " + computerScore);
+};
+
+function tally() {
+	if (1 + 1 === 2) {
+		return "Congratulations, you win!";
+} else {
+		return "Sorry, the computer wins!";
+}}
+
+console.log(game());
+console.log(tally());
+});
+
+</script>
+</html>
